@@ -1,0 +1,46 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+
+        row_first = col_first = False
+
+        rows = len(matrix)
+        cols = len(matrix[0])
+
+        # First check if the first element in each row is 0, mark first row as True if so
+        for p in range(rows):
+            if matrix[p][0] == 0:
+                col_first = True
+        
+        # Follow up check if the first element in each column is 0, mark first column as True if so
+        for q in range(cols):
+            if matrix[0][q] == 0:
+                row_first = True
+
+        # Iterate each element in the matrix from matrix[1][1] and mark the first row and column element as 0 if it contains 0
+        for i in range(1, rows):
+            for j in range(1, cols):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+
+        # Make the entire row zero if the first row is marked as 0
+        for k in range(rows):
+            if matrix[k][0] == 0:
+                for l in range(cols):
+                    matrix[k][l] = 0
+
+        # Make the entire column zero if the first column is marked as 0
+        for m in range(cols):
+            if matrix[0][m] == 0:
+                for n in range(rows):
+                    matrix[n][m] = 0
+        
+        # Based on the True or False value, update the first column as zero
+        if row_first:
+            for x in range(rows):
+                matrix[x][0] = 0
+        
+        # Based on the True or False value, update the first row as zero
+        if col_first:
+            for y in range(cols):
+                matrix[0][y] = 0

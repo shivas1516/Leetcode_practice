@@ -1,0 +1,24 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+
+        #This List gonna to hold the final result at each iteration and used to return the output
+        pascal = [] 
+
+        #This list is responsible for jumping into each rows from 0 to n. 
+        for i in range(numRows):
+            row = [1]*(i+1) #This list create an array contains i elements, where i is the no.of rows 
+            
+            #This inner j loop takes cae of filling the elements in the each row
+            for j in range(1,i):
+
+                #Basically, A value of current(j) element in a pascal triangle is sum of j and j-1 element in previous row. 
+                #j --> current element and i --> current row
+                row[j] = pascal[i-1][j-1] + pascal[i-1][j]
+
+            #append the row in the resultant list pascal
+            pascal.append(row)
+            
+        return pascal
+
+# Time Complexity = n^2
+#Space Complexity = n^2
